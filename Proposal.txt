@@ -1,0 +1,19 @@
+Project Title
+
+UST Bus Timetable Planner
+
+Project Description
+You should give a short description of your planned project. Note it's a plan only. You don't need to implement every function as mentioned. But you should not switch to a totally irrelevant topic for your final product.
+
+For me and other local students, the greatest challenge in life is to get to HKUST campus amidst the neverending queues at Choi Hung :)
+I plan to make use of live Estimated Arrival Time (ETA) data, distributed regularly online by the bus company, to display them in a better and more organised way (e.g. estimate their current location) for HKUST students to view and plan their journey effectively.
+
+Any challenges expected to meet?
+For example, our project needs sound effect. I plan to use xxx to solve it. The reason to choose xxx is yyy.
+
+Data needs to be updated actively so I plan to use shell script stored at the server-side to achieve this. In case it is not possible, data will be manually updated via HTML form + PHP which is less desirable but still works (to some extent).
+
+Distribution of workload among team members?
+Rough estimation of work distribution
+
+I am working alone lol
