@@ -51,7 +51,6 @@
 		}
 		array_push($data, $row);
 		
-		
 		$len++;
 	}
 	fclose($file);
@@ -88,4 +87,32 @@
 		printf("<div style=\"position: fixed; top: 240; left: 5;\"><h4>It will arrive soon.</h4></div>");
 	}
 	
+	$walkdata = array();
+	$walk = fopen( 'walk.csv', "r" );
+	while (!feof($walk)) {
+		$area = explode(",", fgets($walk));
+		array_push($walkdata, $area);
+	}
+	fclose($walk);
+	
+	printf("<table style=\"border: 1px solid black; position: fixed; top: 300; left: 5;\">");
+	printf("<tr>");
+	foreach ($walkdata as $row) {
+		printf("<th>%s</th>", $row[1]);
+	}
+	printf("</tr>");
+	printf("<tr>");
+	foreach ($walkdata as $row) {
+		$offsetsec = $secs - intval($row[2]);
+		if ($offsetsec > 0) {
+			$color = "#4CAF50";
+		} else if ($offsetsec > -60) {
+			$color = "#FFCC00";
+		} else {
+			$color = "#CC0000";
+		}
+		printf("<td style=\"background-color: %s;\"> %d</td>", $color, $offsetsec);
+	}
+	printf("</tr>");
+	printf("</table>");
 ?>
