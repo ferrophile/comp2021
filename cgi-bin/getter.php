@@ -56,8 +56,12 @@
 	}
 	fclose($file);
 	
+	$next=0;
 	for ($i=1; $i<$len; $i++) {
 		if ($data[$i][0] < $data[$i-1][0]) {
+			if ($i <= 12) {
+				$next = $i;
+			}
 			$remain = 0;
 			if ($data[$i][0] > $updated[$i]) {
 				$remain = $data[$i][0] - $updated[$i];
@@ -66,4 +70,18 @@
 			printf("<img src=\"circle.png\" style=\"position: fixed; top: 45; left: %d;\"/>",$offset);
 		}
 	}
+	
+	if ($remain == 0) {
+		printf("<div style=\"position: fixed; top: 210; left: 5;\"><h4>The next bus is near %s</h4></div>", $names[$next]);
+	} else {
+		printf("<div style=\"position: fixed; top: 210; left: 5;\"><h4>The next bus is travelling towards %s.</h4></div>", $names[$next]);		
+	}
+	
+	$secs = $data[12][0] - $updated[$next];
+	if ($secs > 30) {
+		printf("<div style=\"position: fixed; top: 240; left: 5;\"><h4>Arrive at HKUST in about: %d min</h4></div>", (int)($secs / 60));
+	} else {
+		printf("<div style=\"position: fixed; top: 240; left: 5;\"><h4>It will arrive soon.</h4></div>", $secs);
+	}
+	
 ?>
