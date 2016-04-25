@@ -16,16 +16,21 @@
 					if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 						result = xmlhttp.responseText;
 						document.getElementById('map').innerHTML = result;
-					} else {
-						//document.getElementById('test').innerHTML = "waiting for response";				
 					}
 				}
 				xmlhttp.open("GET", "getter.php", true);
 				xmlhttp.send();
+				
+				var currentdate = new Date();
+				var datetime = "Last Sync: " + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+				document.getElementById('updated').innerHTML = datetime;
 			}		
 		</script>
 		<div id="map" style="background-image: url(map.png); height: 200px; width: 1200px;">
 		</div>
-		<input type="button" value="Submit" onclick="retreive()"/>
+		<input type="button" value="Start" onclick="setInterval(retreive, 5000)"/>
+		<div id="updated"></div>
 	</body>
 </html>
