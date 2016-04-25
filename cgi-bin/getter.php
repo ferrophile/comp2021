@@ -71,17 +71,21 @@
 		}
 	}
 	
-	if ($remain == 0) {
-		printf("<div style=\"position: fixed; top: 210; left: 5;\"><h4>The next bus is near %s</h4></div>", $names[$next]);
+	if ($next == 0) {
+		printf("<div style=\"position: fixed; top: 210; left: 5;\"><h4>The next bus is waiting to depart from %s</h4></div>", $names[$next]);
 	} else {
-		printf("<div style=\"position: fixed; top: 210; left: 5;\"><h4>The next bus is travelling towards %s.</h4></div>", $names[$next]);		
+		if ($remain == 0) {
+			printf("<div style=\"position: fixed; top: 210; left: 5;\"><h4>The next bus is near %s</h4></div>", $names[$next]);
+		} else {
+			printf("<div style=\"position: fixed; top: 210; left: 5;\"><h4>The next bus is travelling towards %s</h4></div>", $names[$next]);		
+		}
 	}
 	
 	$secs = $data[12][0] - $updated[$next];
 	if ($secs > 30) {
 		printf("<div style=\"position: fixed; top: 240; left: 5;\"><h4>Arrive at HKUST in about: %d min</h4></div>", (int)($secs / 60));
 	} else {
-		printf("<div style=\"position: fixed; top: 240; left: 5;\"><h4>It will arrive soon.</h4></div>", $secs);
+		printf("<div style=\"position: fixed; top: 240; left: 5;\"><h4>It will arrive soon.</h4></div>");
 	}
 	
 ?>
