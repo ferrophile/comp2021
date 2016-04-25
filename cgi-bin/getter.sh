@@ -1,5 +1,12 @@
-#!/bin/sh
-echo "Hello!"
+#!/bin/bash
+echo "Content-type: text/html"
+echo ""
+echo '<html>'
+echo '<head>'
+echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'
+echo '<title>Hello World</title>'
+echo '</head>'
+echo '<body>'
 
 file='91M_1.csv'
 regex='"response":\[(.*)\]'
@@ -54,10 +61,10 @@ while IFS=',' read -a line; do
 	len=`expr $len + 1`
 done < $file
 
+res=""
 for (( i=1; i<$len; i++ )); do
 	j=`expr $i - 1`
 	if (( ${data[$i, 0]} < ${data[$j, 0]} )); then
-		printf "\n${names[$i]}: "
 		if (( ${data[$i, 0]} > ${updated[$i]} )); then
 			remain=$((${data[$i, 0]} - ${updated[$i]}))
 		else
@@ -66,6 +73,10 @@ for (( i=1; i<$len; i++ )); do
 		offset=$((${dist[$i]} - ${dist[$j]}))
 		offset=$(($offset * $remain / ${interval[$i]}))
 		offset=$((${dist[$i]} - $offset))
-		printf "$remain sec, $offset\n"
+		res="${res}<img src=\"circle.png\" style=\"position: fixed; top: 45; left: ${offset};\"/>"
 	fi
 done
+echo "$res" > 'output.html'
+echo 'Hello World!'
+echo '</body>'
+echo '</html>'
